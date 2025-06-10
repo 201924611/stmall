@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.*;
+
+import org.hibernate.hql.internal.classic.OrderByParser;
+
 import lombok.Data;
 import stmall.DeliveryApplication;
 import stmall.domain.DeliveryCompleted;
@@ -45,13 +48,19 @@ public class Delivery {
     public static void startDelivery(OrderPlaced orderPlaced) {
         //implement business logic here:
 
-        /** Example 1:  new item 
+
         Delivery delivery = new Delivery();
+        delivery.setOrderId(orderPlaced.getId());
+        delivery.setCustomerId(orderPlaced.getCustomerId());
+        delivery.setAddress(orderPlaced.getAddress());
+        delivery.setItemId(orderPlaced.getItemId());
+        delivery.setQty(orderPlaced.getQty());
+        delivery.setStatus("DELIVERY COMPLETED");
         repository().save(delivery);
 
         DeliveryCompleted deliveryCompleted = new DeliveryCompleted(delivery);
         deliveryCompleted.publishAfterCommit();
-        */
+
 
         /** Example 2:  finding and process
         
@@ -65,7 +74,7 @@ public class Delivery {
             deliveryCompleted.publishAfterCommit();
 
          });
-        */
+        
 
     }
 
